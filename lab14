@@ -1,1 +1,221 @@
+int segmentA = A0;
+int segmentB = A1;
+int segmentC = A2;
+int segmentD = 2;
+int segmentE = 4;
+int segmentF = 7;
+int segmentG = 8;
+int segmentDP = 13;
 
+int digit1 = 5;
+int digit2 = 6;
+int digit3 = 9;
+int digit4 = 10;
+int sw12 = 12;
+int temp = 0;
+int k;
+int num[14] = { -1, -1, -1, 6, 3, 0, 1, 0, 2, 2, 9, -1, -1, -1};
+void setup() {
+  Serial.begin(9600);
+  pinMode(segmentA, OUTPUT);
+  pinMode(segmentB, OUTPUT);
+  pinMode(segmentC, OUTPUT);
+  pinMode(segmentD, OUTPUT);
+  pinMode(segmentE, OUTPUT);
+  pinMode(segmentF, OUTPUT);
+  pinMode(segmentG, OUTPUT);
+  pinMode(segmentDP, OUTPUT);
+  pinMode(digit1, OUTPUT);
+  pinMode (digit2, OUTPUT);
+  pinMode (digit3, OUTPUT);
+  pinMode (digit4, OUTPUT);
+  pinMode(sw12, INPUT_PULLUP);
+  digitalWrite(digit1, LOW);
+  digitalWrite(digit2, LOW);
+  digitalWrite(digit3, LOW);
+  digitalWrite(digit4, LOW);
+  int i, j = 0;
+}
+
+void loop() {
+
+  /*for (int i = 0 ; i < 11 ; i++) {
+    int j = 0;
+
+    while (j <= 100) {
+      for (k = 0 ; k < 4 ; k++) {
+        if (num[i + k] != -1) {
+          displaySegment(num[i + k]);
+          digitControl(k + 1);
+          
+        }
+        else {
+          digitControl(0);
+        }
+        
+
+      }
+      j++;
+
+    }
+  }*/
+
+  int sensorValue = analogRead(A4),x,i=0;
+  float voltage = sensorValue * (5.0 / 1023.0);
+  while(i <= 20){
+    Serial.println(voltage);
+    x = voltage * 100;
+    
+    displaySegment(x%10);
+    digitControl(4);
+    x = x / 10;
+  
+    displaySegment(x%10);
+    digitControl(3);
+    x = x / 10;
+  
+      displaySegment(x%10);
+    digitControl(2);
+    i++;
+  }
+  
+}
+
+void displaySegment(int numberToDisplay)
+{
+  switch (numberToDisplay)
+  {
+    case 0:
+      digitalWrite(segmentA, HIGH);
+      digitalWrite(segmentB, HIGH);
+      digitalWrite(segmentC, HIGH);
+      digitalWrite(segmentD, HIGH);
+      digitalWrite(segmentE, HIGH);
+      digitalWrite(segmentF, HIGH);
+      digitalWrite(segmentG, LOW);
+      //digitalWrite(segment12, HIGH);
+
+      break;
+    case 1:
+      digitalWrite(segmentA, LOW);
+      digitalWrite(segmentB, HIGH);
+      digitalWrite(segmentC, HIGH);
+      digitalWrite(segmentD, LOW);
+      digitalWrite(segmentE, LOW);
+      digitalWrite(segmentF, LOW);
+      digitalWrite(segmentG, LOW);
+      //digitalWrite(segment12, LOW);
+      break;
+    case 2:
+      digitalWrite(segmentA, HIGH);
+      digitalWrite(segmentB, HIGH);
+      digitalWrite(segmentC, LOW);
+      digitalWrite(segmentD, HIGH);
+      digitalWrite(segmentE, HIGH);
+      digitalWrite(segmentF, LOW);
+      digitalWrite(segmentG, HIGH);
+      break;
+    case 3:
+      digitalWrite(segmentA, HIGH);
+      digitalWrite(segmentB, HIGH);
+      digitalWrite(segmentC, HIGH);
+      digitalWrite(segmentD, HIGH);
+      digitalWrite(segmentE, LOW);
+      digitalWrite(segmentF, LOW);
+      digitalWrite(segmentG, HIGH);
+      break;
+    case 4:
+      digitalWrite(segmentA, LOW);
+      digitalWrite(segmentB, HIGH);
+      digitalWrite(segmentC, HIGH);
+      digitalWrite(segmentD, LOW);
+      digitalWrite(segmentE, LOW);
+      digitalWrite(segmentF, HIGH);
+      digitalWrite(segmentG, HIGH);
+      break;
+    case 5:
+      digitalWrite(segmentA, HIGH);
+      digitalWrite(segmentB, LOW);
+      digitalWrite(segmentC, HIGH);
+      digitalWrite(segmentD, HIGH);
+      digitalWrite(segmentE, LOW);
+      digitalWrite(segmentF, HIGH);
+      digitalWrite(segmentG, HIGH);
+      break;
+    case 6:
+      digitalWrite(segmentA, HIGH);
+      digitalWrite(segmentB, LOW);
+      digitalWrite(segmentC, HIGH);
+      digitalWrite(segmentD, HIGH);
+      digitalWrite(segmentE, HIGH);
+      digitalWrite(segmentF, HIGH);
+      digitalWrite(segmentG, HIGH);
+      break;
+    case 7:
+      digitalWrite(segmentA, HIGH);
+      digitalWrite(segmentB, HIGH);
+      digitalWrite(segmentC, HIGH);
+      digitalWrite(segmentD, LOW);
+      digitalWrite(segmentE, LOW);
+      digitalWrite(segmentF, HIGH);
+      digitalWrite(segmentG, LOW);
+      break;
+    case 8:
+      digitalWrite(segmentA, HIGH);
+      digitalWrite(segmentB, HIGH);
+      digitalWrite(segmentC, HIGH);
+      digitalWrite(segmentD, HIGH);
+      digitalWrite(segmentE, HIGH);
+      digitalWrite(segmentF, HIGH);
+      digitalWrite(segmentG, HIGH);
+      break;
+    case 9:
+      digitalWrite(segmentA, HIGH);
+      digitalWrite(segmentB, HIGH);
+      digitalWrite(segmentC, HIGH);
+      digitalWrite(segmentD, HIGH);
+      digitalWrite(segmentE, LOW);
+      digitalWrite(segmentF, HIGH);
+      digitalWrite(segmentG, HIGH);
+      break;
+  }
+}
+
+void digitControl(int x) {
+  if (x == 1) {
+    digitalWrite(digit1, HIGH);
+    digitalWrite(digit2, LOW);
+    digitalWrite(digit3, LOW);
+    digitalWrite(digit4, LOW);
+  }
+  if (x == 2) {
+    digitalWrite(digit1, LOW);
+    digitalWrite(digit2, HIGH);
+    digitalWrite(digit3, LOW);
+    digitalWrite(digit4, LOW);
+  }
+  if (x == 3) {
+    digitalWrite(digit1, LOW);
+    digitalWrite(digit2, LOW);
+    digitalWrite(digit3, HIGH);
+    digitalWrite(digit4, LOW);
+  }
+  if (x == 4) {
+    digitalWrite(digit1, LOW);
+    digitalWrite(digit2, LOW);
+    digitalWrite(digit3, LOW);
+    digitalWrite(digit4, HIGH);
+  }
+
+  delay(2);
+  x = 0;
+  if (x == 0) {
+    digitalWrite(digit1, LOW);
+    digitalWrite(digit2, LOW);
+    digitalWrite(digit3, LOW);
+    digitalWrite(digit4, LOW);
+  }
+  delay(2);
+
+
+}
