@@ -193,6 +193,7 @@ void digitControl(int x) {
     digitalWrite(digit2, HIGH);
     digitalWrite(digit3, LOW);
     digitalWrite(digit4, LOW);
+    digitalWrite(segmentDP,HIGH);
   }
   if (x == 3) {
     digitalWrite(digit1, LOW);
@@ -214,6 +215,7 @@ void digitControl(int x) {
     digitalWrite(digit2, LOW);
     digitalWrite(digit3, LOW);
     digitalWrite(digit4, LOW);
+    digitalWrite(segmentDP, LOW);
   }
   delay(2);
 
