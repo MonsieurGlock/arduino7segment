@@ -61,7 +61,7 @@ void loop() {
   }*/
 
   int sensorValue = analogRead(A4),x,i=0;
-  float voltage = sensorValue * (5.0 / 1023.0);
+  float voltage = sensorValue * (10.0 / 1023.0);
   while(i <= 20){
     Serial.println(voltage);
     x = voltage * 100;
