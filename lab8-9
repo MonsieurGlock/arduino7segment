@@ -154,32 +154,26 @@ void displaySegment(int numberToDisplay)
 }
 
 void digitControl(int x) {
-  if (x == 1) {
+  
     digitalWrite(digit1, HIGH);
     digitalWrite(digit2, LOW);
     digitalWrite(digit3, LOW);
     digitalWrite(digit4, LOW);
-  }
-  if (x == 2) {
-    digitalWrite(digit1, LOW);
-    digitalWrite(digit2, HIGH);
-    digitalWrite(digit3, LOW);
-    digitalWrite(digit4, LOW);
-    digitalWrite(segmentDP, HIGH);
-  }
-  if (x == 3) {
-    digitalWrite(digit1, LOW);
-    digitalWrite(digit2, LOW);
-    digitalWrite(digit3, HIGH);
-    digitalWrite(digit4, LOW);
-  }
-  if (x == 4) {
-    digitalWrite(digit1, LOW);
-    digitalWrite(digit2, LOW);
-    digitalWrite(digit3, LOW);
-    digitalWrite(digit4, HIGH);
-  }
-
+  switch(x){
+    case 1:
+      digitalWrite(digit1, HIGH);
+      break;
+    case 2:
+      digitalWrite(digit2, HIGH);
+      break;
+    case 3:
+      digitalWrite(digit3, HIGH);
+      break;
+    case 4:
+      digitalWrite(digit4, HIGH);
+      break;      
+    }
+ 
   delay(2);
     digitalWrite(digit1, LOW);
     digitalWrite(digit2, LOW);
