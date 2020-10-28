@@ -13,7 +13,17 @@ int digit3 = 9;
 int digit4 = 10;
 int sw12 = 12;
 int temp = 0;
+int k;
+
+int Vo;
+float B = 3435;
+float R1 = 10000; // R -> R
+float R0 = 10000; // R -> R_Thermister at 25 C
+float R_Thermister, T;
+float T0 = 25 + 273.5;
+
 void setup() {
+  Serial.begin(9600);
   pinMode(segmentA, OUTPUT);
   pinMode(segmentB, OUTPUT);
   pinMode(segmentC, OUTPUT);
@@ -31,28 +41,16 @@ void setup() {
   digitalWrite(digit2, LOW);
   digitalWrite(digit3, LOW);
   digitalWrite(digit4, LOW);
-
+  int i, j = 0;
 }
 
 void loop() {
-  digitalWrite (digit4 , LOW);
-  digitalWrite (digit1 , HIGH);
-  displaySegment(4);
-  delay(2);
-  digitalWrite (digit1 , LOW);
-  digitalWrite (digit2 , HIGH);
-  displaySegment(3);
-  delay(2);
-  digitalWrite (digit2 , LOW);
-  digitalWrite (digit3 , HIGH);
-  displaySegment(2);
-  delay(2);
-  digitalWrite (digit3 , LOW);
-  digitalWrite (digit4 , HIGH);
-  displaySegment(1);
-  delay(2);
-
-
+  for(i=1 ; i <= 4 ; i++){
+    displaySegment(i);
+    digitControl(i);
+  }
+  
+  
 }
 
 void displaySegment(int numberToDisplay)
@@ -153,5 +151,34 @@ void displaySegment(int numberToDisplay)
       digitalWrite(segmentG, HIGH);
       break;
   }
+}
+
+void digitControl(int x) {
+  
+    digitalWrite(digit1, HIGH);
+    digitalWrite(digit2, LOW);
+    digitalWrite(digit3, LOW);
+    digitalWrite(digit4, LOW);
+  switch(x){
+    case 4:
+      digitalWrite(digit1, HIGH);
+      break;
+    case 3:
+      digitalWrite(digit2, HIGH);
+      break;
+    case 2:
+      digitalWrite(digit3, HIGH);
+      break;
+    case 1:
+      digitalWrite(digit4, HIGH);
+      break;      
+    }
+ 
+  delay(2);
+    digitalWrite(digit1, LOW);
+    digitalWrite(digit2, LOW);
+    digitalWrite(digit3, LOW);
+    digitalWrite(digit4, LOW);
+ 
 }
 
